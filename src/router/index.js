@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import MainContent from '@/components/MainContent.vue';
 import TradeContent from '@/components/TradeContent.vue';
+import ChatView from '@/components/Chat.vue';
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     path: '/trade',
     name: 'Trade',
     component: TradeContent
+  },
+  {
+    path: '/chat',
+    name: 'ChatView',
+    component: ChatView
   }
 ];
 

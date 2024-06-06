@@ -2,7 +2,7 @@
   <div>
     <section class="banner">
       <h1>믿을만한 이웃 간 중고거래</h1>
-      <p>동네 주민들과 거리를 두고 안전한 거래를 지금 경험해보세요.</p>
+      <p>동네 주민들과 가깝고 안전한 거래를 지금 경험해보세요.</p>
     </section>
     <section class="items">
       <h2>중고거래 인기매물</h2>

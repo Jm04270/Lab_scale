@@ -2,8 +2,10 @@
   <StyledHeader>
     <LogoAndText>
       <div class="logo-and-text">
-        <img src="@/assets/carrot-logo.png" alt="당근마켓 로고" class="logo"/>
-        <span class="logo-text">당근</span>
+        <router-link to="/" class = "logo-link">
+          <img src="@/assets/carrot-logo.png" alt="당근마켓 로고" class="logo"/>
+          <span class="logo-text">당근</span>
+        </router-link>
         <router-link to="/trade" class="trade-text">중고거래</router-link>
       </div>
     </LogoAndText>
@@ -15,7 +17,9 @@
 
     <UserActions>
       <OrangeButton>로그인</OrangeButton>
-      <WhiteButton>채팅하기</WhiteButton>
+      <router-link to="/chat">
+        <WhiteButton>채팅하기</WhiteButton> 
+      </router-link>
     </UserActions>
   </StyledHeader>
 </template>
@@ -49,5 +53,11 @@ export default {
 </script>
 
 <style scoped>
-/* 필요에 따라 스타일 추가 */
+  .logo-link{
+    text-decoration: none;
+  }
+  .trade-text{
+    text-decoration: none;
+    color : #999999;
+  }
 </style>
