@@ -8,9 +8,9 @@
       <h2>중고거래 인기매물</h2>
       <div class="item-list">
         <div class="item" v-for="item in items" :key="item.id">
-          <img :src="item.image" :alt="item.name">
+          <img :src="item.imageUrl" :alt="item.name">
           <h3>{{ item.name }}</h3>
-          <p>{{ item.price }}원</p>
+          <p>{{ item.price }}</p>
           <p>{{ item.location }}</p>
         </div>
       </div>
@@ -19,24 +19,37 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'TradeContent',
   data() {
     return {
-      items: [
-        { id: 1, name: '위닉스 제습기', price: 250000, location: '연동', image: require('@/assets/image1.png') },
-        { id: 2, name: '갤럭시 S9', price: 70000, location: '삼양동', image: require('@/assets/image2.png') },
-        { id: 3, name: '호두와 견과류 한 박스', price: 10000, location: '아라동', image: require('@/assets/image3.png') },
-        { id: 4, name: 'LG 모니터 일체형 컴퓨터', price: 50000, location: '노형동', image: require('@/assets/image4.png') },
-        { id: 5, name: '노지감귤', price: 20000, location: '이도2동', image: require('@/assets/image5.png') },
-        { id: 6, name: '중고 전동차', price: 300000, location: '외도동', image: require('@/assets/image6.png') },
-        { id: 7, name: '휴지', price: 6000, location: '연동', image: require('@/assets/image7.png') },
-        { id: 8, name: '애플 패드 + 키보드 팝니다', price: 100000, location: '아라동', image: require('@/assets/image8.png') },
-        { id: 9, name: '여성용 미니백', price: 20000, location: '노형동', image: require('@/assets/image9.png') },
-      ]
-    }
-  }
-}
+      items: [],
+    };
+  },
+  methods: {
+    async fetchItems() {
+      try {
+        const response = await axios.get('http://localhost:3000/api/items');
+        const items = response.data;
+        for (let item of items) {
+          const imageResponse = await axios.get(`http://localhost:3000/api/image/${item.imageName}`, {
+            responseType: 'blob',
+          });
+          item.imageUrl = URL.createObjectURL(imageResponse.data);
+        }
+        this.items = items;
+      } catch (error) {
+        console.error(error);
+        alert('데이터를 가져오는 데 실패했습니다.');
+      }
+    },
+  },
+  created() {
+    this.fetchItems();
+  },
+};
 </script>
 
 <style scoped>
